@@ -49,6 +49,7 @@ class TransactionsEntryPoint extends AbstractEntryPoint
      */
     public function find(
         Transaction $transaction = null,
+        $scope = null,
         $amountFrom = null,
         $amountTo = null,
         DateTime $settlesAtFrom = null,
@@ -72,6 +73,7 @@ class TransactionsEntryPoint extends AbstractEntryPoint
             'GET',
             'transactions/find',
             $this->convertTransactionToRequest($transaction) + $this->convertPaginationToRequest($pagination) + [
+                'scope' => $scope,
                 'amount_from' => $amountFrom,
                 'amount_to' => $amountTo,
                 'settles_at_from' => (null === $settlesAtFrom) ? null : $settlesAtFrom->format(DateTime::ISO8601),
